@@ -43,19 +43,25 @@ const crearContacto = (e) => {
   //dibujar una fila
   crearFila(nuevoContacto, agenda.length);
   modalAdminContacto.hide();
+  //mostrar un mensaje al usuario
+  Swal.fire({
+    title: "Contacto creado",
+    text: `El contacto ${nuevoContacto.nombre} fue creado correctamente`,
+    icon: "success",
+  });
 };
 
 function limpiarFormulario() {
   formularioContacto.reset();
 }
 
-function guardarEnLocalStorage(){
-    localStorage.setItem("agendaKey", JSON.stringify(agenda))
+function guardarEnLocalStorage() {
+  localStorage.setItem("agendaKey", JSON.stringify(agenda));
 }
 
-function crearFila(contacto, fila){
-    const tablaContactos = document.querySelector("tbody");
-    tablaContactos.innerHTML += `<tr>
+function crearFila(contacto, fila) {
+  const tablaContactos = document.querySelector("tbody");
+  tablaContactos.innerHTML += `<tr>
     <th scope="row">${fila}</th>
     <td>${contacto.nombre}</td>
     <td>${contacto.apellido}</td>
@@ -65,30 +71,31 @@ function crearFila(contacto, fila){
       <button class="btn btn-warning">Editar</button
       ><button class="btn btn-danger">Borrar</button>
     </td>
-  </tr>`
+  </tr>`;
 }
 
-function cargaInicial(){
-    if(agenda.length > 0){
-        agenda.map((itemcontacto, posicion)=> crearFila(itemcontacto, posicion + 1));
+function cargaInicial() {
+  if (agenda.length > 0) {
+    agenda.map((itemcontacto, posicion) =>
+      crearFila(itemcontacto, posicion + 1)
+    );
 
-        //const tablaContactos = document.querySelector("tbody");
-        //for(let i=0; i < agenda.length; i++){
-         // tablaContactos.innerHTML += `<tr>
+    //const tablaContactos = document.querySelector("tbody");
+    //for(let i=0; i < agenda.length; i++){
+    // tablaContactos.innerHTML += `<tr>
     //<th scope="row">${i++}</th>
     //<td>${agenda[i].nombre}</td>
     //<td>${agenda[i].apellido}</td>
     //<td>${agenda[i].email}</td>
-   // <td>${agenda[i].celular}</td>
+    // <td>${agenda[i].celular}</td>
     //<td>
     //  <button class="btn btn-warning">Editar</button
-     // ><button class="btn btn-danger">Borrar</button>
-   // </td>
-  //</tr>`
-      //  }
-    }
-    //agregar un cartel informativo para el usuario
-
+    // ><button class="btn btn-danger">Borrar</button>
+    // </td>
+    //</tr>`
+    //  }
+  }
+  //agregar un cartel informativo para el usuario
 }
 
 //logica extra
