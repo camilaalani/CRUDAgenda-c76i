@@ -12,7 +12,7 @@ const nombre = document.getElementById("nombre"),
   apellido = document.getElementById("apellido"),
   telefono = document.getElementById("telefono"),
   email = document.getElementById("email");
-const agenda = [];
+const agenda = JSON.parse(localStorage.getItem("agendaKey")) || [];
 
 //funciones
 const mostrarModal = () => {
