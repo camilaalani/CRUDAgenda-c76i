@@ -48,4 +48,14 @@ export default class Contacto {
   set celular(nuevoCelular) {
     this.#celular = nuevoCelular;
   }
+  //este metodo sirve para el objeto JSON.stringify
+  toJSON() {
+    return {
+      id: this.id,
+      nombre: this.nombre,
+      apellido: this.apellido,
+      email: this.email,
+      celular: this.celular,
+    };
+  }
 }
