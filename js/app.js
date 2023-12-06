@@ -99,21 +99,42 @@ function cargaInicial() {
 }
 
 window.borrarContacto = (idContacto) => {
-  console.log("desde la funcion borrar contacto");
-  console.log(idContacto);
-  //buscar en el array el objeto que tiene este idContacto array.findIndex
-  const posicionContactoBuscado = agenda.findIndex(
-    (itemcontacto) => itemcontacto.id === idContacto
-  );
-  console.log(posicionContactoBuscado);
-  //borrar el objeto del array usando splice(posicion del objeto, cuantos borro)
-  agenda.splice(posicionContactoBuscado, 1);
-  //actualizar el localstorage
-  guardarEnLocalStorage();
-  //borrar una fila de la tabla
-  const tablaContactos = document.querySelector("tbody");
-  console.log(tablaContactos.children[posicionContactoBuscado]); //objeto.propiedad[posicionarray]
-  tablaContactos.removeChild(tablaContactos.children[posicionContactoBuscado]);
+  Swal.fire({
+    title: "¿Estas seguro que quieres borrar?",
+    text: "No puedes revertir este paso",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Borrar",
+    cancelButtonText: "Cancelar",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      //aqui agrego mi logica
+      console.log("desde la funcion borrar contacto");
+      console.log(idContacto);
+      //buscar en el array el objeto que tiene este idContacto array.findIndex
+      const posicionContactoBuscado = agenda.findIndex(
+        (itemcontacto) => itemcontacto.id === idContacto
+      );
+      console.log(posicionContactoBuscado);
+      //borrar el objeto del array usando splice(posicion del objeto, cuantos borro)
+      agenda.splice(posicionContactoBuscado, 1);
+      //actualizar el localstorage
+      guardarEnLocalStorage();
+      //borrar una fila de la tabla
+      const tablaContactos = document.querySelector("tbody");
+      console.log(tablaContactos.children[posicionContactoBuscado]); //objeto.propiedad[posicionarray]
+      tablaContactos.removeChild(
+        tablaContactos.children[posicionContactoBuscado]
+      );
+      Swal.fire({
+        title: "Contacto eliminado",
+        text: "El contacto fue eliminado exitosamente",
+        icon: "success",
+      });
+    }
+  });
 };
 
 //logica extra
